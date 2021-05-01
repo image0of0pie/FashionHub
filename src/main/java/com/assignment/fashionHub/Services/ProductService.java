@@ -24,10 +24,6 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-//    public Product getByDressType( String dresstype ){
-//        return productRepository.findProductByB_dresstype(dresstype)
-//                .orElseThrow(() -> new IllegalStateException("Dress not found"));
-//    }
 
     public List<Product> getProductsByDressType( String dresstype){
         return productRepository.findProductsByB_Dresstype(dresstype);
@@ -46,15 +42,19 @@ public class ProductService {
         Integer totalPages = prods.getTotalPages();
         List<Product> products = prods.getContent();
         products = rearrange(products, countBySex, newProds);
-        Integer current = page;
         HashMap<String, Object> hs = new HashMap<>();
-        hs.put("current" , current);
+        hs.put("current" , page);
         hs.put("products" , products);
         hs.put("total" , totalPages);
         return hs;
-
     }
 
+    public String getProductSummaryBySex(String sex){
+        return String.valueOf(productRepository.countProductsByA_sex(sex));
+    }
+    public String getProductSummaryByArrival(String arrival){
+            return String.valueOf(productRepository.countProductsByE_arrival(arrival));
+    }
 
     private List<Product> rearrange( List<Product> products, Map<Boolean, Long> countBySex, List<Product> newProds){
 

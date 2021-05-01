@@ -68,10 +68,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/","/static/**", "index*", "/css/*", "/js/*","/media/*","*.ico","*.png").permitAll()
                 .antMatchers("/api/register").permitAll()
                 .antMatchers("/api/auth").permitAll()
+                .antMatchers("/api/admin/token").permitAll()
+                .antMatchers("/api/admin/**").authenticated()
                 .antMatchers("/api/persist/**").authenticated()
-
+                .antMatchers("/api/v1/cloth").permitAll()
                 .antMatchers("/api/v1/**").authenticated()
-                .antMatchers("/admin/api/**").hasRole(ADMIN.name())
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(restAuthEntryPoint)
@@ -87,8 +88,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
                 .addLogoutHandler(logoutHandler)
                 .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK))
-                .and().headers()
-                .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "*"));
+                .and().headers().addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "*"))
+                .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Methods", "POST, GET"))
+                .addHeaderWriter(new StaticHeadersWriter("Access-Control-Max-Age", "3600"))
+                .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Credentials", "true"))
+                .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Headers", "Origin,Accept,X-Requested-With,Content-Type,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization"));
+
+
     }
 
 

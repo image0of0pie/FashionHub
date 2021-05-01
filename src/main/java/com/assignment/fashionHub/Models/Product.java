@@ -17,13 +17,11 @@ public class Product {
 
     public enum sex{
         MALE,
-        FEMALE
+        FEMALE,
     }
-
     @Id
     Long id;
     @Enumerated(EnumType.STRING)
-
     @Column(name = "sex")
     sex a_sex;
     @Column(name = "dresstype")

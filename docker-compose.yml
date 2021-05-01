@@ -1,49 +1,32 @@
-version: '3'
+version: "3"
 
 services:
-
-  db:
+  fashdb:
     image: "postgres:9.6-alpine"
-    container_name: db
+    container_name: fashdb
     restart: always
 
     ports:
       - 5432:5432
 
-#    volumes:
-#      - postgres_data:/var/lib/postgresql/data
-
     environment:
-      - POSTGRES_DB=fashionHub
+      - POSTGRES_DB=fashionhub
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - PGDATA=/var/lib/postgresql/data/pgdata
 
-
   fashionhub:
     build: ./
-#    image: "thesyncoder/flamup:0.0.2"
     container_name: fashionhub
     environment:
-      - DB_SERVER:db
-      - POSTGRES_DB=fashionHub
+      - DB_SERVER:fashdb
+      - POSTGRES_DB=fashionhub
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
-      - 8443:8443 # Forward the exposed port 8080 on the container to port 8080 on the host machine
-
+      - 8550:8550
     depends_on:
-      - db
-
-
+      - fashdb
 
 volumes:
   postgres_data:
-
-
-
-
-
-
-
-

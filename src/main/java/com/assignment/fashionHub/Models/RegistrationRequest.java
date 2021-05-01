@@ -18,4 +18,5 @@ public class RegistrationRequest {
     private String email;
     private String gender;
     private String role;
+    private String token;
 }

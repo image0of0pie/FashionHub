@@ -20,7 +20,8 @@ public class ApplicationUser implements UserDetails {
 
     public enum Gender{
         MALE,
-        FEMALE
+        FEMALE,
+        RATHER_NOT_TOSAY
     }
 
     @SequenceGenerator(
