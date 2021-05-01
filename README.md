@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <img  src="https://github.com/image0of0pie/FashionHub/logo.png">
+  <img  src="https://github.com/image0of0pie/FashionHub/blob/main/logo.png">
 </p>
 
 This is a full stack web application made with spring boot and ReactJs in the frontend. 
